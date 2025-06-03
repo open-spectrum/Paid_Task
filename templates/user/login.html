@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/login.css')}}">
+    <title>PaidTask</title>
+</head>
+<body>
+       {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+            {% for message in messages %}
+                <script src="{{url_for('static',filename='js/global.js')}}"></script>
+
+                <script>
+                  showFlashMessage('{{message}}', 'error');
+                  // showFlashMessage('Erro: saldo insuficiente.', 'error');
+                  // showFlashMessage('Atenção: chave Pix ausente.', 'info');
+                </script>
+            {% endfor %}
+
+       {% endif %}
+      {% endwith %}
+
+
+
+
+
+    <header>
+       <div class="logo">
+        <img src="{{url_for('static',filename='img/logo.png')}}" alt="">
+        <a href="{{url_for('home')}}"> <h1>Paid Task</h1></a>
+       
+       </div> 
+      
+      
+       
+</header>
+
+<main>
+<div class="form">
+  <form action="{{url_for('auth')}}" method="post" class="" style="max-width: 400px;">
+    <h2 class="">Login</h2>
+
+    <div class="">
+      <label for="user" class="form-label">Usuário</label>
+      <br>
+      <input type="text" name="user" id="user" class="form-control" required>
+           <br>
+    </div>
+
+    <div class="mb-3">
+
+      <label for="pass" class="form-label">Senha</label>
+           <br>
+      <input type="password" name="pass" id="pass" class="form-control" required>
+           <br>
+    </div>
+
+    <button type="submit" class="btn ">Logar</button>
+  </form>
+</div>
+</main>
+
+</body>
+</html>

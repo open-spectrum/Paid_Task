@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Paid-Task Anúncios</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+</head>
+<body>
+ {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+            {% for message in messages %}
+                <script src="{{url_for('static',filename='js/global.js')}}"></script>
+
+                <script>
+                  showFlashMessage('{{message}}', 'success');
+                  // showFlashMessage('Erro: saldo insuficiente.', 'error');
+                  // showFlashMessage('Atenção: chave Pix ausente.', 'info');
+                </script>
+            {% endfor %}
+
+       {% endif %}
+      {% endwith %}
+<header class="header">
+  <div class="header__logo">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Paid Task" />
+    <a href="{{ url_for('home') }}" class="header__title">Paid Task</a>
+  </div>
+  <div class="header__user">
+    <p class="header__balance"><strong>{% if sald %}R$ {{ sald }}{% endif %}</strong></p>
+    <a href="{{ url_for('profile') }}" class="nav__icon-link">
+      <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Perfil" />
+    </a>
+    <a href="{{ url_for('logout') }}" class="nav__logout">Sair</a>
+  </div>
+</header>
+
+<main class="main">
+
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '206bcd78c0071034d3c666d8d2d5b4fe',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/206bcd78c0071034d3c666d8d2d5b4fe/invoke.js"></script>
+
+  <section class="withdraw-form__section" style="max-width: 1000px; width: 100%;">
+    <h1 class="form__title">Anúncios</h1>
+
+<script type="text/javascript">
+	atOptions = {
+		'key' : '1ebe2d2ccf5bdf574a00d8edc4f0f435',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/1ebe2d2ccf5bdf574a00d8edc4f0f435/invoke.js"></script>
+
+
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+<script type="text/javascript">
+	atOptions = {
+		'key' : '7349a2ce96c90260813cff588237ba48',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/7349a2ce96c90260813cff588237ba48/invoke.js"></script>
+     
+    </div>
+
+    <div class="payment-history__section">
+    <h1>Permaneça nesta tela por <strong class="time">10 segundos</strong></h1>
+
+    <script type="text/javascript">
+	atOptions = {
+		'key' : 'cb014742953c1122372f90c3cd083271',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/cb014742953c1122372f90c3cd083271/invoke.js"></script>
+    
+</div>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '1f6d2d525c49f1c0506c4f1f05497588',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/1f6d2d525c49f1c0506c4f1f05497588/invoke.js"></script>
+
+
+<script type='text/javascript' src='//pl26832903.profitableratecpm.com/0e/c0/18/0ec0183dddf096099da5527d233987ba.js'></script>
+
+
+
+<script type='text/javascript' src='//pl26832999.profitableratecpm.com/60/53/b5/6053b58db3f7cca199ddf452687be931.js'></script>
+  </section>
+
+  <script type="text/javascript">
+	atOptions = {
+		'key' : '00014430eeda01cced44797502f866cd',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/00014430eeda01cced44797502f866cd/invoke.js"></script>
+
+
+<script async="async" data-cfasync="false" src="//pl26832935.profitableratecpm.com/1a93485923cfc505d3cd8cb47897b514/invoke.js"></script>
+<div id="container-1a93485923cfc505d3cd8cb47897b514"></div>
+</main>
+<script>
+    var time = document.getElementsByClassName("time")[0]
+    let count = 10
+    
+    setInterval(() => {
+
+        count-=1
+        console.log(count)
+
+        time.innerText = count.toString()+' Segundos'
+
+        if (count <= 0){
+            location.href = "{{url_for('reward_video')}}"
+        }
+    },1000);
+</script>
+</body>
+</html>

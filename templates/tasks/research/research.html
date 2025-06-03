@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pesquisa</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+</head>
+<body>
+
+<header class="header">
+  <div class="header__logo">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Paid Task" />
+    <a href="{{ url_for('home') }}" class="header__title">Paid Task</a>
+  </div>
+  <div class="header__user withdraw">
+    <p class="header__balance"><strong>{% if sald %}R$ {{ sald }}{% endif %}</strong></p>
+    <a href="{{ url_for('profile') }}" class="nav__icon-link">
+      <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Perfil" />
+    </a>
+    <a href="{{ url_for('logout') }}" class="nav__logout">Sair</a>
+  </div>
+</header>
+
+<main class="main" style="justify-content: center;">
+  <section class="withdraw-form__section" style="max-width: 480px; width: 100%;">
+
+    {% if research.questions['question_' ~ r] %}
+      <h1 class="form__title">Pesquisa</h1>
+
+      <p><strong>Pergunta {{ r }}:</strong> {{ research.questions['question_' ~ r]['text'] }}</p>
+
+      <br>
+      <form>
+        <div class="form__group">
+          <label class="form__label">
+          
+            <input type="checkbox" name="option_a" />
+            {{ research.questions['question_' ~ r]['options']['a'] }}
+          </label>
+        </div>
+        <div class="form__group">
+          <label class="form__label">
+            <input type="checkbox" name="option_b" />
+            {{ research.questions['question_' ~ r]['options']['b'] }}
+          </label>
+        </div>
+        <div class="form__group">
+          <label class="form__label">
+            <input type="checkbox" name="option_c" />
+            {{ research.questions['question_' ~ r]['options']['c'] }}
+          </label>
+        </div>
+        <div class="form__group">
+          <label class="form__label">
+            <input type="checkbox" name="option_d" />
+            {{ research.questions['question_' ~ r]['options']['d'] }}
+          </label>
+        </div>
+      </form>
+
+      <a href="{{ url_for('questions') }}?id={{ research.id }}&r={{ r | int + 1 }}" class="btn" style="width: 100%; margin-top: 1rem;">
+        Próximo
+      </a>
+
+    {% else %}
+      <h1 class="form__title">Parabéns! Você Concluiu a pesquisa.</h1>
+      <p><strong>R$ {{ research.task_pricing }}</strong></p>
+      <a href="/reward?id={{ research.id }}" class="btn" style="width: 100%; margin-top: 1rem;">
+        Resgatar Recompensa
+      </a>
+    {% endif %}
+
+  </section>
+</main>
+
+</body>
+</html>

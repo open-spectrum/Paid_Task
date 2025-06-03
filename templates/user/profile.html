@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaidTask - Perfil</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+</head>
+<body>
+   {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+            {% for message in messages %}
+                <script src="{{url_for('static',filename='js/global.js')}}"></script>
+
+                <script>
+                  showFlashMessage('{{message}}', 'success');
+                  // showFlashMessage('Erro: saldo insuficiente.', 'error');
+                  // showFlashMessage('Atenção: chave Pix ausente.', 'info');
+                </script>
+            {% endfor %}
+
+       {% endif %}
+      {% endwith %}
+  <!-- Header -->
+  <header class="header">
+    <div class="header__logo">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
+      <a href="{{ url_for('home') }}"><h1 class="header__title">PaidTask</h1></a>
+    </div>
+    <div class="header__user">
+      <p class="header__balance">
+        {% if sald %}
+          R$ {{ sald }}
+        {% endif %}
+      </p>
+      
+      <a href="{{ url_for('logout') }}" class="nav__logout">Sair</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <section class="withdraw-form__section">
+      <h2 class="form__title">Editar Perfil</h2>
+
+      <form action="{{ url_for('edit_profile') }}" method="post">
+        <div class="form__group">
+          <label for="user" class="form__label">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="user"
+            class="form__input"
+            required
+            value="{{ username }}"
+          />
+        </div>
+
+        <div class="form__group">
+          <label for="pix_key" class="form__label">Chave Pix</label>
+          <input
+            type="text"
+            name="pix_key"
+            id="pix_key"
+            class="form__input"
+            required
+            value="{{ pix_key }}"
+          />
+        </div>
+
+        <button type="submit" class="btn">Salvar</button>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Novo Usuário</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+</head>
+<body>
+
+<header class="header">
+  <div class="header__logo">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Paid Task" />
+    <a href="{{ url_for('home') }}" class="header__title">Paid Task</a>
+  </div>
+  <div class="header__user">
+    <p class="header__balance"><strong>{% if sald %}R$ {{ sald }}{% endif %}</strong></p>
+    <a href="{{ url_for('profile') }}" class="nav__icon-link">
+      <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Perfil" />
+    </a>
+    <a href="{{ url_for('logout') }}" class="nav__logout">Sair</a>
+  </div>
+</header>
+
+<main class="main">
+  <section class="withdraw-form__section" style="max-width: 400px;">
+    <h2 class="form__title">Novo Usuário</h2>
+
+    <form action="{{ url_for('create_user') }}" method="post">
+      <div class="form__group">
+        <label class="form__label">Nome</label>
+        <input type="text" name="username" class="form__input" required>
+      </div>
+
+      <div class="form__group">
+        <label class="form__label">Saldo</label>
+        <input type="number" name="sald" class="form__input" required>
+      </div>
+
+      <div class="form__group">
+        <label class="form__label">Senha</label>
+        <input type="text" name="password" class="form__input" required>
+      </div>
+
+      <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Cadastrar Usuário</button>
+    </form>
+  </section>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+  <title>PaidTask</title>
+  <style>
+    /* Tabela responsiva */
+    .history__table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow-x: auto;
+      display: block;
+    }
+
+    .history__table th,
+    .history__table td {
+      padding: 8px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 768px) {
+      .history__table {
+        font-size: 14px;
+      }
+    }
+
+    /* Estilo para melhorar input */
+    .form__input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <script src="{{ url_for('static', filename='js/global.js') }}"></script>
+        <script>
+          showFlashMessage('{{ message }}', 'success');
+        </script>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <header class="header">
+    <div class="header__logo">
+      <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Paid Task" />
+      <a href="{{ url_for('home') }}">
+        <h1 class="header__title">Paid Task</h1>
+      </a>
+    </div>
+
+    <div class="header__user">
+      <p class="header__balance"><strong>
+        {% if sald %}
+        R$ {{ sald }}
+        {% endif %}
+      </strong></p>
+      <a href="{{ url_for('profile') }}" class="nav__icon-link">
+        <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Perfil" />
+      </a>
+      <a href="{{ url_for('logout') }}" class="nav__logout">Sair</a>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="withdraw-form__section">
+      <form action="{{ url_for('payment') }}" method="post" class="withdraw-form" onsubmit="return formatInput()">
+        <h2 class="form__title">Realizar Saque</h2>
+        <p class="form__note">* O pagamento será realizado em até 24 horas úteis</p>
+
+        <div class="form__group">
+          <label for="amount" class="form__label">Valor</label>
+          <input
+            type="text"
+            name="quantity"
+            id="amount"
+            class="form__input"
+            pattern="^\d+(,\d{1,2})?$"
+            placeholder="0,00"
+            required
+          />
+        </div>
+
+        <div class="form__group">
+          <label for="pixKey" class="form__label">Chave Pix</label>
+          <input type="text" name="pix_key" id="pixKey" class="form__input" required value="{{ pix_key }}" />
+        </div>
+
+        <button type="submit" class="btn btn--primary">Solicitar</button>
+      </form>
+    </section>
+
+    <section class="payment-history__section">
+      <h3 class="history__title">Histórico de Pagamentos</h3>
+      <table class="history__table">
+        <thead>
+          <tr>
+            <th>Valor</th>
+            <th>Status</th>
+            <th>Hora</th>
+            <th>Chave Pix</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for payment in payments %}
+          <tr>
+            <td>R$ {{ payment.quantity }}</td>
+            <td>
+              {% if payment.status == "pago" %}
+                <strong style="color: rgb(0, 255, 0); background-color: black; padding: 10px;">Pago</strong>
+              {% elif payment.status == "rejeitado" %}
+                <strong style="color: rgb(255, 68, 0); background-color: black; padding: 10px;">Rejeitado</strong>
+              {% elif payment.status == "pendente" %}
+                <strong style="color: rgb(255, 217, 0); background-color: black; padding: 10px;">Pendente</strong>
+              {% endif %}
+            </td>
+            <td>{{ payment.date }}</td>
+            <td>{{ payment.pix_key }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Script para converter vírgula em ponto ao enviar -->
+  <script>
+    function formatInput() {
+      const input = document.getElementById("amount");
+      let value = input.value.trim();
+
+      // Substitui vírgula por ponto
+      value = value.replace(",", ".");
+
+      const floatValue = parseFloat(value);
+
+      // Bloqueia valores abaixo de 0.01
+      if (isNaN(floatValue) || floatValue < 0.01) {
+        alert("Insira um valor válido acima de R$ 0,01.");
+        return false;
+      }
+
+      // Substitui o valor final para o backend aceitar
+      input.value = floatValue.toFixed(2);
+      return true;
+    }
+  </script>
+</body>
+</html>

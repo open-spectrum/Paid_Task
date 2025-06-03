@@ -1,0 +1,61 @@
+ 
+ <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">
+    <title>PaidTask</title>
+</head>
+<body>
+ 
+ 
+ <header>
+       <div class="logo">
+        <img src="{{url_for('static',filename='img/logo.png')}}" alt="">
+        <a href="{{url_for('home')}}"> <h1>Paid Task</h1></a>
+       
+       </div> 
+      
+        <div class="withdraw">
+                  <a href="{{url_for('withdraw')}}" class="btn"><strong>Sacar</strong></a>
+        <p class="sald"><Strong>
+            {% if sald %}
+            R$ {{ sald }}
+            {%endif%}
+        </Strong></p>
+          <a href="{{url_for('profile')}}" class="a-nav"><img src="{{url_for('static',filename='img/profile.png')}}" alt=""></a> <a href="{{url_for('logout')}}" class="a-nav">Sair</a>
+        </div>
+       
+    </header>
+    <main>
+        <div class="menu-two">
+             <h2>Pesquisa</h2>
+            
+
+            
+        </div>
+       
+
+  <div class="methods">
+  {%if tasks%}
+    {% for task in tasks %}
+      <a href="task/{{task.id}}"><div class="card">
+                    <div class="card_header">
+                        <h3>{{task.task_name}}</h3>
+                        <img class="img-card" src="{{url_for('static',filename='img/research.png')}}" alt="">
+                    </div>
+                    <div class="card_body">
+                        <p>R$ {{task.task_pricing}}</p>
+                        
+                    </div>
+          </div>
+      </a> 
+       
+      
+    {% endfor %}
+  {%else%}
+
+   <h4>Todas As Pesquisas Ja Foram Realizadas! Volte Mais tarde</h4>
+  {%endif%}
+</div>

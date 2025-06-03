@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Criar Tarefa</title>
+  <link rel="stylesheet" href="/static/css/global.css">
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    h1, h2 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--sald);
+    }
+    form {
+      background-color: var(--card-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #00000080;
+    }
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--sald);
+    }
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      border: none;
+      background-color: var(--bg-input-two);
+      color: var(--text-white);
+      font-size: 1rem;
+      resize: vertical;
+      box-sizing: border-box;
+      transition: outline 0.2s ease-in-out;
+    }
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    textarea:focus {
+      outline: 2px solid var(--sald);
+      background-color: #3a3a3a;
+    }
+    .question-block {
+      background-color: var(--bg-input);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      box-shadow: inset 0 0 6px #00000080;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.4rem;
+      border-radius: 15px;
+      border: none;
+      background-color: var(--sald);
+      color: var(--bg);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 1.5rem;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #f1ff4d;
+    }
+    #addQuestionBtn {
+      background-color: var(--accent-blue);
+      margin-top: 0;
+      color: white;
+    }
+    #addQuestionBtn:hover {
+      background-color: #0051bd;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Nova Tarefa</h1>
+    <form id="taskForm" action="{{ url_for('create_task') }}" method="POST" novalidate>
+      <label for="task_name">Nome</label>
+      <input id="task_name" type="text" name="task_name" required />
+
+      <label for="task_pricing">Preço</label>
+      <input id="task_pricing" type="text" name="task_pricing" min="0" step="0.01" required />
+
+      <label for="img">Imagem URL</label>
+      <input id="img" type="text" name="img" placeholder="https://..." />
+
+      <label for="task_description">Descrição</label>
+      <textarea id="task_description" name="task_description" rows="4" required></textarea>
+
+      <h2>Perguntas</h2>
+      <div id="questionsContainer"></div>
+
+      <button type="button" id="addQuestionBtn" class="btn" onclick="addQuestion()">Adicionar Pergunta</button>
+
+      <textarea id="jsonOutput" name="task_question" style="display:none;" required></textarea>
+
+      <button type="submit" class="btn">Criar Tarefa</button>
+    </form>
+  </main>
+
+  <script>
+    let questionCount = 0;
+
+    function addQuestion() {
+      const container = document.getElementById('questionsContainer');
+
+      const questionDiv = document.createElement('div');
+      questionDiv.className = 'question-block';
+      questionDiv.innerHTML = `
+        <label for="question_${questionCount}_text">Pergunta</label>
+        <input type="text" id="question_${questionCount}_text" name="question_${questionCount}_text" required />
+
+        <label for="question_${questionCount}_a">Opção A</label>
+        <input type="text" id="question_${questionCount}_a" name="question_${questionCount}_a" required />
+
+        <label for="question_${questionCount}_b">Opção B</label>
+        <input type="text" id="question_${questionCount}_b" name="question_${questionCount}_b" required />
+
+        <label for="question_${questionCount}_c">Opção C</label>
+        <input type="text" id="question_${questionCount}_c" name="question_${questionCount}_c" required />
+
+        <label for="question_${questionCount}_d">Opção D</label>
+        <input type="text" id="question_${questionCount}_d" name="question_${questionCount}_d" required />
+      `;
+
+      container.appendChild(questionDiv);
+      questionCount++;
+    }
+
+    document.getElementById('taskForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      if (questionCount === 0) {
+        alert('Adicione ao menos uma pergunta para criar a tarefa.');
+        return;
+      }
+
+      const output = {};
+
+      for (let i = 0; i < questionCount; i++) {
+        const textInput = document.querySelector(`[name=question_${i}_text]`);
+        const aInput = document.querySelector(`[name=question_${i}_a]`);
+        const bInput = document.querySelector(`[name=question_${i}_b]`);
+        const cInput = document.querySelector(`[name=question_${i}_c]`);
+        const dInput = document.querySelector(`[name=question_${i}_d]`);
+
+        if (!textInput?.value.trim() || !aInput?.value.trim() || !bInput?.value.trim() || !cInput?.value.trim() || !dInput?.value.trim()) {
+          alert(`Por favor, preencha todos os campos da pergunta ${i + 1}.`);
+          return;
+        }
+
+        output[`question_${i}`] = {
+          text: textInput.value.trim(),
+          options: {
+            a: aInput.value.trim(),
+            b: bInput.value.trim(),
+            c: cInput.value.trim(),
+            d: dInput.value.trim()
+          }
+        };
+      }
+
+      document.getElementById('jsonOutput').value = JSON.stringify(output);
+      this.submit();
+    });
+  </script>
+</body>
+</html>

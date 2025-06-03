@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">
+    <title>PaidTask</title>
+</head>
+<body>
+    <header>
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+            {% for message in messages %}
+                <script src="{{url_for('static',filename='js/global.js')}}"></script>
+
+                <script>
+                  showFlashMessage('{{message}}', 'success');
+                  // showFlashMessage('Erro: saldo insuficiente.', 'error');
+                  // showFlashMessage('Atenção: chave Pix ausente.', 'info');
+                </script>
+            {% endfor %}
+
+       {% endif %}
+      {% endwith %}
+
+
+
+
+
+       <div class="logo">
+        <img src="{{url_for('static',filename='img/logo.png')}}" alt="">
+        <a href="{{url_for('home')}}"> <h1>Paid Task</h1></a>
+       
+       </div> 
+      
+        <div class="withdraw">
+                  <a href="{{url_for('withdraw')}}" class="btn"><strong>Sacar</strong></a>
+        <p class="sald"><Strong>
+            {% if sald %}
+            R$ {{ sald }}
+            {%endif%}
+        </Strong></p>
+          <a href="{{url_for('profile')}}" class="a-nav"><img src="{{url_for('static',filename='img/profile.png')}}" alt=""></a> <a href="{{url_for('logout')}}" class="a-nav">Sair</a>
+        </div>
+       
+    </header>
+    <main>
+        <div class="menu-two">
+             <h2>Metodos De Ganhos</h2>
+             {%if username%}
+
+             <h2>Bem Vindo {{username}}</h2>
+
+              {%endif%}
+        </div>
+       
+
+        <div class="methods">
+
+              <a href="{{url_for('research')}}"> 
+                <div class="card">
+                    <div class="card_header">
+                        <h3>Pesquisas</h3>
+                        <img class="img-card" src="{{url_for('static',filename='img/research.png')}}" alt="">
+                    </div>
+                    <div class="card_body">
+                        <p>Ganhe Entre R$0.001 Ha R$ 1,50</p>
+                    </div>
+                </div>
+              </a>
+
+
+              <a href="{{url_for('video')}}">
+                <div class="card">
+                    <div class="card_header">
+                        <h3>Ver Anúncios</h3>
+                        <img class="img-card" src="{{url_for('static',filename='img/video.png')}}" alt="">
+                    </div>
+                    <div class="card_body">
+                        <p>Ganhe R$0.01 a cada 10 segundos</p>
+                    </div>
+                </div>
+                </a>
+                 <div class="card">
+                    <div class="card_header">
+                        <h3>Jogos</h3>
+                        <img class="img-card" src="{{url_for('static',filename='img/games.png')}}" alt="">
+                    </div>
+                    <div class="card_body">
+                        <p>Disponivel Em Breve...</p>
+                    </div>
+                </div>
+        </div>
+
+    </main>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* Estilo específico para formulário de perfil */
+.form {
+  background-color: #26294b;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin: 40px auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.form__title {
+  color: white;
+  font-size: 20px;
+  border-left: 4px solid var(--sald);
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.form__group {
+  margin-bottom: 15px;
+}
+
+input.form-control {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--bg-input-two);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button.btn {
+  background-color: var(--sald);
+  color: var(--bg);
+  padding: 10px;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button.btn:hover {
+  background-color: #c8dc11;
+}

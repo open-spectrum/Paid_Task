@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Usuários</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+</head>
+<body>
+
+<header class="header">
+  <div class="header__logo">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Paid Task" />
+    <a href="{{ url_for('home') }}" class="header__title">Paid Task</a>
+  </div>
+  <div class="header__user">
+    <p class="header__balance"><strong>{% if sald %}R$ {{ sald }}{% endif %}</strong></p>
+    <a href="{{ url_for('profile') }}" class="nav__icon-link">
+      <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Perfil" />
+    </a>
+    <a href="{{ url_for('logout') }}" class="nav__logout">Sair</a>
+  </div>
+</header>
+
+<main class="main">
+  <section class="withdraw-form__section" style="max-width: 1000px; width: 100%;">
+    <h2 class="form__title">Usuários</h2>
+
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+      <a href="{{ url_for('create_user') }}" class="btn">Criar Usuário</a>
+      <a href="{{ url_for('create_task') }}" class="btn">Criar Tarefa</a>
+      <a href="{{ url_for('pay') }}" class="btn">Pagamentos</a>
+    </div>
+
+    <div class="payment-history__section">
+      <table class="history__table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Saldo</th>
+            <th>Pix</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+            <tr>
+              <td>{{ user.id }}</td>
+              <td>{{ user.username }}</td>
+              <td>R$ {{ user.sald }}</td>
+              <td>{{ user.pix_key }}</td>
+              <td>
+             
+                <a href="{{url_for('edit_user')}}?id={{user.id}}" class="btn" style="background-color: var(--accent-blue); color: white;">Editar</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

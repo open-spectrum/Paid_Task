@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Videos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+</head>
+<body>
+ {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+            {% for message in messages %}
+                <script src="{{url_for('static',filename='js/global.js')}}"></script>
+
+                <script>
+                  showFlashMessage('{{message}}', 'success');
+                  // showFlashMessage('Erro: saldo insuficiente.', 'error');
+                  // showFlashMessage('Atenção: chave Pix ausente.', 'info');
+                </script>
+            {% endfor %}
+
+       {% endif %}
+      {% endwith %}
+<header class="header">
+  <div class="header__logo">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Paid Task" />
+    <a href="{{ url_for('home') }}" class="header__title">Paid Task</a>
+  </div>
+  <div class="header__user">
+    <p class="header__balance"><strong>{% if sald %}R$ {{ sald }}{% endif %}</strong></p>
+    <a href="{{ url_for('profile') }}" class="nav__icon-link">
+      <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Perfil" />
+    </a>
+    <a href="{{ url_for('logout') }}" class="nav__logout">Sair</a>
+  </div>
+</header>
+
+<main class="main">
+  <section class="withdraw-form__section" style="max-width: 1000px; width: 100%;">
+    <h1 class="form__title">Anúncios</h1>
+
+
+    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    
+     
+    </div>
+
+    <div class="payment-history__section">
+  
+    <h3>Você recebe R$ 0,01 a cada 10 segundos</h3>
+    <p>Como funciona?</p>
+    <ul>
+        <li>Fique nesta página pelo tempo indicado.</li>
+        <li>Não é necessário clicar em nada.</li>
+        <li>Alguns anúncios serão exibidos durante o período.</li>
+        <li>A recompensa é creditada automaticamente a cada 10 segundos.</li>
+    </ul>
+    <a class="btn" href="{{url_for('ads_view')}}">Começar</a>
+</div>
+
+  </section>
+</main>
+</body>
+</html>

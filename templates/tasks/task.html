@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Detalhes da Tarefa</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" />
+</head>
+<body>
+
+<header class="header">
+  <div class="header__logo">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo Paid Task" />
+    <a href="{{ url_for('home') }}" class="header__title">Paid Task</a>
+  </div>
+  <div class="header__user">
+    <p class="header__balance">
+      {% if sald %}
+        R$ {{ sald }}
+      {% endif %}
+    </p>
+    <a href="{{ url_for('profile') }}" class="nav__icon-link">
+      <img src="{{ url_for('static', filename='img/profile.png') }}" alt="Perfil" />
+    </a>
+    <a href="{{ url_for('logout') }}" class="nav__logout">Sair</a>
+  </div>
+</header>
+
+<main class="main">
+  <section class="withdraw-form__section container">
+    <h1 class="form__title">Tarefa</h1>
+
+    <p><strong>Nome:</strong> {{ task.task_name }}</p>
+    <p><strong>Preço:</strong> R$ {{ task.task_pricing }}</p>
+    <p><strong>Descrição:</strong> {{ task.description }}</p>
+
+    {% if task.img %}
+      <img src="{{ task.img }}" alt="Imagem da tarefa" style="max-width: 100%; margin: 1rem 0; border-radius: 6px;" />
+    {% endif %}
+
+    <a href="{{ url_for('questions') }}?id={{ task.id }}&&r=0" class="btn" style="max-width: 300px; width: 100%; margin-top: 1.5rem;">
+      Realizar Pesquisa
+    </a>
+  </section>
+</main>
+
+</body>
+</html>
