@@ -4,6 +4,8 @@ from models.research_model import Research
 from config import db
 from models.payment_model import Payment
 import json
+from models.ads_model import Ads
+
 class AdminController:
     @staticmethod 
     def index_admin():
@@ -119,3 +121,27 @@ class AdminController:
            db.session.commit()
            flash("Usuario Atualizado!")
            return redirect(url_for("admin"),code=302)
+
+    def ads():
+        ads = Ads.query.all()
+        return render_template("admin/ads_manager.html",ads=ads)
+    
+    def add_ads_src():
+        if request.method == "POST":
+            content = request.form.get("content")
+            type_ad = request.form.get("type")
+            ads = Ads(content=content,type_ad=type_ad)
+            db.session.add(ads)
+            db.session.commit()
+            flash("Bloco de ad adicionado com sucesso")
+            return redirect(url_for("ad_manager"),302)
+        else:
+
+            return render_template("admin/add_ad.html")
+
+       
+    
+    def edit_ads():
+        pass
+    
+        

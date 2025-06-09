@@ -5,7 +5,8 @@ app = Flask(__name__)
 
 app.secret_key = 'rnzimblkhpp12342334465##'
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://paid_task:t@34.136.243.220//paid_task"
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:root@localhost/paid_task?charset=utf8mb4"
+
 
 db = SQLAlchemy(app)
 

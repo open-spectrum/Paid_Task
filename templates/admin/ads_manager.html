@@ -24,13 +24,17 @@
 
 <main class="main">
   <section class="withdraw-form__section" style="max-width: 1000px; width: 100%;">
-    <h2 class="form__title">Usuários</h2>
+    <h2 class="form__title">Ads</h2>
 
     <div style="display: flex; gap: 10px; margin-bottom: 20px;">
       <a href="{{ url_for('create_user') }}" class="btn">Criar Usuário</a>
       <a href="{{ url_for('create_task') }}" class="btn">Criar Tarefa</a>
       <a href="{{ url_for('pay') }}" class="btn">Pagamentos</a>
-        <a href="{{ url_for('ad_manager') }}" class="btn">Ads Manager</a>
+
+      <a href="{{ url_for('add_ads') }}" class="btn">Adicionar</a>
+
+      <a href="{{ url_for('admin') }}" class="btn">Voltar</a>
+
     </div>
 
     <div class="payment-history__section">
@@ -38,23 +42,20 @@
         <thead>
           <tr>
             <th>Id</th>
-            <th>Username</th>
-            <th>Saldo</th>
-            <th>Pix</th>
+            <th>Conteudo</th>
+            <th>Tipo</th>
             <th>Ações</th>
+          
           </tr>
         </thead>
         <tbody>
-          {% for user in users %}
+          {% for ad in ads %}
             <tr>
-              <td>{{ user.id }}</td>
-              <td>{{ user.username }}</td>
-              <td>R$ {{ user.sald }}</td>
-              <td>{{ user.pix_key }}</td>
-              <td>
+              <td>{{ad.id}}</td>
+              <td>{{ad.content}}</td>
+              <td>{{ad.type_ad}}</td>
+              <td><a href="">Editar</a></td>
              
-                <a href="{{url_for('edit_user')}}?id={{user.id}}" class="btn" style="background-color: var(--accent-blue); color: white;">Editar</a>
-              </td>
             </tr>
           {% endfor %}
         </tbody>

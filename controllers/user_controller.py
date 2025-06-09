@@ -4,6 +4,7 @@ from models.research_model import Research
 from models.task_history_model import TaskHistoryResearch
 from config import db
 from models.payment_model import  Payment
+from models.ads_model import Ads
 
 class UserController:
    
@@ -120,7 +121,9 @@ class UserController:
     @staticmethod
     def ads_view():
         sald = Users.query.get(session.get('id')).sald
-        return render_template("tasks/video/video_ads.html",sald=sald),200
+        ads = Ads.query.all()
+   
+        return render_template("tasks/video/video_ads.html",sald=sald,ads=ads),200
     
 
 

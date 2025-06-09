@@ -6,6 +6,7 @@ from controllers.research_controller  import ResearchController
 from controllers.admin_controller import AdminController
 from controllers.task_controller import TaskController
 from middleware.auth import login_required,login_required_admin
+
 app = config.app
 db = config.db
 
@@ -132,6 +133,18 @@ def reward_video():
 @login_required
 def ads_view():
    return UserController.ads_view()
+@app.route("/add_ads_src")
+def add_ads_src():
+    pass
+
+@app.route("/ads")
+def ad_manager():
+   return AdminController.ads()
+
+@app.route("/add_ads",methods=['POST','GET'])
+def add_ads():
+   return AdminController.add_ads_src()
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",debug=True)
