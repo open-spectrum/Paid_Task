@@ -77,7 +77,7 @@
 
 ### Instalação
 ```bash
-git clone https://github.com/rnzim/Paid_Task.git
+git clone https://github.com/open-spectrum/Paid_Task.git
 cd Paid_Task
 python3 -m venv venv
 source venv/bin/activate
