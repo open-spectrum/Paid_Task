@@ -77,9 +77,11 @@
 
 ### Instalação
 ```bash
-git clone https://github.com/seuusuario/paid-task.git
-cd paid-task
-python -m venv venv
+git clone https://github.com/rnzim/Paid_Task.git
+cd Paid_Task
+python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python create.py #Cria todas as tabelas
+python app.py
 
