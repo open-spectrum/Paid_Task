@@ -1,4 +1,129 @@
-{% extends "template.html" %}
-{%block content %}
-    <h1>Home</h1>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paid Task - Plataforma de Renda Extra</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Poppins:wght@100..900&display=swap');
+    :root {
+      --bg: #191B32;
+      --bg-input: #555555;
+      --bg-input-two: rgb(30, 32, 52);
+      --text-white: #ffffffd9;
+      --sald: #D6ED16;
+      --accent-blue: #0066f6;
+      --card-bg: #26294b;
+      --danger: #ff4d4d;
+      --border: #2c2f4a;
+    }
+
+    * {
+
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    header h1 {
+      color: var(--text-white);
+      font-size: 28px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .hero {
+      max-width: 700px;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      color: #ffffffa6;
+    }
+
+    .btn {
+      background-color: var(--accent-blue);
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0050c2;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid var(--border);
+      background-color: var(--card-bg);
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Paid Task</h1>
+    <nav>
+      <a href="/login">Entrar</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <h2>Ganhe dinheiro realizando tarefas simples!</h2>
+      <p>Com a <strong>Paid Task</strong> você pode aumentar sua renda fazendo tarefas online como testes de apps, pesquisas e avaliações de serviços.</p>
+      <a class="btn" href="/home">Começar Agora</a>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Paid Task. Todos os direitos reservados.
+  </footer>
+</body>
+</html>

@@ -12,7 +12,7 @@ class TaskHistoryResearch(db.Model):
     id_user = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     # id_research referente a research.id que é int unsigned
-    id_research = db.Column(INTEGER(unsigned=True), db.ForeignKey("research.id"), nullable=False)
+    id_research = db.Column(db.Integer, db.ForeignKey("research.id"), nullable=False)
 
     date = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 

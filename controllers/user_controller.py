@@ -5,7 +5,7 @@ from models.task_history_model import TaskHistoryResearch
 from config import db
 from models.payment_model import  Payment
 from models.ads_model import Ads
-
+from datetime import date
 class UserController:
    
     Users()
@@ -46,7 +46,7 @@ class UserController:
     @staticmethod
     def home():
         username = session.get("username")
-        # Saldo do usuário
+       
         sald = Users.query.filter_by(id=session['id']).first()
 
         return render_template("user/home.html", username=username, sald=sald.sald), 200
@@ -100,7 +100,22 @@ class UserController:
 
          
             user = Users.query.get(user_id)
+            payments = Payment.query.filter_by(id_user=user_id).all()
+            data_format = date.today().strftime("%Y-%m-%d")
+            total = 0
+            for payment in payments:
+              
+                 if data_format in str(payment.date):
+                   
+                   total+=payment.quantity
+
+            if total > 2:
+                 
+                 flash("Limite Diario Excedido Tente Novamente Amanhã |")
+                 return redirect(url_for("withdraw"),code=302)
+
             if quantity <= user.sald and quantity > 0:
+
 
                 new_payment = Payment(id_user=user_id,quantity=quantity,pix_key=pix_key,status="pendente")
 
@@ -108,7 +123,9 @@ class UserController:
 
                 db.session.add(new_payment)
                 db.session.commit()
-                flash("Saqur Realizado Com Sucesso")
+
+                flash("Saquer Solicitado Com Sucesso")
+
             else:
                 flash("Saldo Insuficiente!")
 
